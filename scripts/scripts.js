@@ -104,9 +104,13 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   try {
-    await initializeCommerce();
+    // Race commerce initialization against a 6s timeout to prevent indefinite hang
+    await Promise.race([
+      initializeCommerce(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Commerce init timed out')), 6000)),
+    ]);
   } catch (e) {
-    // Commerce initialization failed (e.g., config fetch blocked), continue rendering
+    // Commerce initialization failed (e.g., config fetch blocked or timed out), continue rendering
     // eslint-disable-next-line no-console
     console.warn('Commerce initialization failed, continuing page render:', e.message);
   }
