@@ -103,7 +103,13 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  await initializeCommerce();
+  try {
+    await initializeCommerce();
+  } catch (e) {
+    // Commerce initialization failed (e.g., config fetch blocked), continue rendering
+    // eslint-disable-next-line no-console
+    console.warn('Commerce initialization failed, continuing page render:', e.message);
+  }
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

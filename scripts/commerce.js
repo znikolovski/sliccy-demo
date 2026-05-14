@@ -522,12 +522,24 @@ export async function getConfigFromSession() {
     }
     return parsedConfig;
   } catch (e) {
-    const config = await fetch(configURL);
-    if (!config.ok) throw new Error('Failed to fetch config');
-    const configJSON = await config.json();
-    configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
-    window.sessionStorage.setItem('config', JSON.stringify(configJSON));
-    return configJSON;
+    // Add timeout to prevent indefinite hang in restricted environments
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    try {
+      const config = await fetch(configURL, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      if (!config.ok) throw new Error('Failed to fetch config');
+      const configJSON = await config.json();
+      configJSON[':expiry'] = Math.round(Date.now() / 1000) + 7200;
+      window.sessionStorage.setItem('config', JSON.stringify(configJSON));
+      return configJSON;
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      // Return minimal config to allow page to render without commerce features
+      // eslint-disable-next-line no-console
+      console.warn('Config fetch failed, using empty config:', fetchError.message);
+      return { 'public': { 'default': {} } };
+    }
   }
 }
 
