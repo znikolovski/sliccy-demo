@@ -1,33 +1,120 @@
+/* columns block — 2-col promo: text left, image right */
+
+.columns-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.columns {
+  --columns-bg: #f7f7f7;
+  --columns-text: #333333;
+  --columns-padding: 20px;
+  --columns-gap: 0;
+}
+
+/* Row: the single-row flex container */
 .columns > div {
   display: flex;
+  align-items: stretch;
+  gap: var(--columns-gap);
+  min-height: 380px;
+}
+
+/* Left cell — text content */
+.columns > div > div:first-child {
+  flex: 0 0 50%;
+  background-color: var(--columns-bg);
+  padding: 40px var(--columns-padding);
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  color: var(--columns-text);
 }
 
-.columns img {
+/* Right cell — image */
+.columns > div > div:last-child {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+
+.columns > div > div:last-child picture {
+  display: block;
+  height: 100%;
+}
+
+.columns > div > div:last-child img {
   width: 100%;
-}
-
-.columns > div > div {
-  order: 1;
-}
-
-.columns > div > .columns-img-col {
-  order: 0;
-}
-
-.columns > div > .columns-img-col img {
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-@media (width >= 900px) {
+/* Heading */
+.columns h2 {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--columns-text);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Body text */
+.columns p {
+  font-size: 14px;
+  color: var(--columns-text);
+  line-height: 1.6;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* CTA button — override project-level reset with higher specificity */
+main .columns .button-container {
+  display: block;
+  margin-top: 8px;
+}
+
+main .columns a.button:any-link {
+  display: inline-block;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 14px 17px;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+main .columns a.button:any-link:hover {
+  background-color: #dddddd;
+  border-color: #bbbbbb;
+  text-decoration: none;
+}
+
+/* Mobile: stack columns */
+@media (width < 768px) {
   .columns > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: column;
+    min-height: auto;
   }
 
-  .columns > div > div {
-    flex: 1;
-    order: unset;
+  .columns > div > div:first-child,
+  .columns > div > div:last-child {
+    flex: none;
+    width: 100%;
+  }
+
+  .columns > div > div:last-child {
+    min-height: 240px;
+  }
+
+  .columns > div > div:last-child img {
+    height: 240px;
   }
 }

@@ -25,3 +25,57 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* Product cards variant — green background, white text, side-by-side layout */
+.cards.product > ul {
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 16px;
+}
+
+.cards.product > ul > li {
+  background-color: #5a7a45;
+  border: none;
+  color: #ffffff;
+  padding: 20px 20px 0;
+}
+
+.cards.product > ul > li h3 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: var(--heading-font-size-s, 20px);
+}
+
+.cards.product > ul > li p {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cards.product .cards-card-body {
+  margin: 0;
+}
+
+/* CTA button override — light grey bordered button */
+main .cards.product a.button:any-link {
+  display: inline-flex;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 14px 17px;
+  margin: 12px 0 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .cards.product a.button:any-link:hover {
+  background-color: #dddddd;
+  text-decoration: none;
+}
+
+main .cards.product .button-container {
+  display: block;
+  margin-bottom: 0;
+}

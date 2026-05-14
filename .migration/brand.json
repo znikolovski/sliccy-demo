@@ -1,0 +1,62 @@
+{
+  "fonts": {
+    "body": {
+      "family": "Open Sans",
+      "familySet": "\"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+    },
+    "heading": {
+      "family": "Open Sans",
+      "familySet": "\"Open Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+    },
+    "headingSizes": {
+      "xxl": {
+        "mobile": "36px",
+        "desktop": "24px"
+      },
+      "xl": {
+        "mobile": "28px",
+        "desktop": "26px"
+      },
+      "l": {
+        "mobile": "24px",
+        "desktop": ""
+      },
+      "m": {
+        "mobile": "20px",
+        "desktop": ""
+      },
+      "s": {
+        "mobile": "18px",
+        "desktop": ""
+      },
+      "xs": {
+        "mobile": "16px",
+        "desktop": ""
+      }
+    },
+    "sources": {
+      "typekit": null,
+      "googleFonts": []
+    }
+  },
+  "colors": {
+    "background": "rgb(255, 255, 255)",
+    "text": "rgb(51, 51, 51)",
+    "link": "rgb(0, 107, 180)",
+    "linkHover": "rgb(0, 107, 180)",
+    "light": "",
+    "dark": ""
+  },
+  "spacing": {
+    "sectionPadding": "0px",
+    "contentMaxWidth": "",
+    "navHeight": "47px"
+  },
+  "favicons": [
+    {
+      "url": "https://bodea-com548.adobedemo.com/media/favicon/stores/2/bFavicon.png",
+      "rel": "icon",
+      "type": "image/x-icon"
+    }
+  ]
+}
