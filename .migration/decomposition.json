@@ -1,0 +1,93 @@
+{
+  "url": "https://bodea-com548.adobedemo.com/",
+  "fragments": [
+    {
+      "path": "/nav",
+      "children": [
+        {
+          "type": "block",
+          "name": "header",
+          "id": "header",
+          "bounds": { "x": 0, "y": 0, "width": 1192, "height": 166 },
+          "notes": "Luma header: top panel with auth links, logo, search, cart, nav menu with Products dropdown (sub: Critical Power, Cooling, Switching, Cables, Wi-Fi, Racks>Racks/Servers), Software, Maintenance Services"
+        }
+      ]
+    },
+    {
+      "path": "/",
+      "children": [
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "block",
+              "name": "hero",
+              "id": "hero",
+              "bounds": { "x": 0, "y": 213, "width": 1192, "height": 562 },
+              "notes": "Full-width background image (data center/server room), no text overlay"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "default-content",
+              "id": "tagline",
+              "bounds": { "x": 0, "y": 695, "width": 1192, "height": 136 },
+              "notes": "H2: 'Leading the way to the future of digital solutions', CTA button: Shop Now → /products.html"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "block",
+              "name": "columns",
+              "id": "columns-promo",
+              "bounds": { "x": 0, "y": 830, "width": 1192, "height": 380 },
+              "notes": "2-col layout: left=text (H2 'Energy Tactics for Telecom Networks', paragraph, 'Shop Hardware' CTA → /products.html), right=image (person at computer workstation)"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "children": [
+            {
+              "type": "block",
+              "name": "cards",
+              "id": "popular-products",
+              "bounds": { "x": 0, "y": 1211, "width": 1192, "height": 336 },
+              "notes": "H2 'Popular Products', 2 cards: Racker Blade Server (description, 'Buy Racker Blade Server' → /racker-blade-server.html), VR Rack (description, 'Buy VR Rack' → /vr-rack.html). Green card background."
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "style": "dark",
+          "children": [
+            {
+              "type": "default-content",
+              "id": "disclaimer",
+              "bounds": { "x": 0, "y": 1546, "width": 1192, "height": 70 },
+              "notes": "Small disclaimer text: 'Any reference to Bodea...'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/footer",
+      "children": [
+        {
+          "type": "block",
+          "name": "footer",
+          "id": "footer",
+          "bounds": { "x": 0, "y": 1616, "width": 1192, "height": 166 },
+          "notes": "2-col footer: left=links (Privacy and Cookie Policy, Orders and Returns, Contact Us), right=newsletter signup (email input, Subscribe button). Dark bg. Copyright bar below."
+        }
+      ]
+    }
+  ]
+}

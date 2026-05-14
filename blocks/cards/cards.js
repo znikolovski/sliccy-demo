@@ -14,4 +14,10 @@ export default function decorate(block) {
   });
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.replaceChildren(ul);
+
+  // Detect product variant: cards with no images get the 'product' class
+  const hasImages = ul.querySelector('.cards-card-image');
+  if (!hasImages) {
+    block.classList.add('product');
+  }
 }

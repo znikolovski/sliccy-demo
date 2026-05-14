@@ -1,0 +1,304 @@
+{
+  "tree": {
+    "tag": "BODY",
+    "selector": "#html-body",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1192,
+      "height": 1248
+    },
+    "children": [
+      {
+        "tag": "HEADER",
+        "selector": "#html-body > div.page-wrapper > header",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1192,
+          "height": 166
+        },
+        "children": [
+          {
+            "tag": "DIV",
+            "selector": "#html-body > div.page-wrapper > header > div.panel.wrapper",
+            "bounds": {
+              "x": 0,
+              "y": 0,
+              "width": 1192,
+              "height": 43
+            },
+            "children": [],
+            "className": "panel",
+            "background": {
+              "type": "color",
+              "value": "rgb(84, 97, 106)",
+              "raw": "rgb(84, 97, 106) none repeat scroll 0% 0% / auto padding-box border-box",
+              "source": "css"
+            },
+            "text": "My Store Quick Order Skip to C",
+            "layout": "2x2"
+          },
+          {
+            "tag": "DIV",
+            "selector": "#html-body > div.page-wrapper > header > div.header.content",
+            "bounds": {
+              "x": 0,
+              "y": 43,
+              "width": 1192,
+              "height": 123
+            },
+            "children": [],
+            "className": "header",
+            "layout": "3x1",
+            "text": "Toggle Nav My Cart window.chec"
+          }
+        ],
+        "className": "page-header"
+      },
+      {
+        "tag": "DIV",
+        "selector": "#html-body > div.page-wrapper > div",
+        "bounds": {
+          "x": 0,
+          "y": 166,
+          "width": 1192,
+          "height": 47
+        },
+        "children": [],
+        "className": "sections",
+        "background": {
+          "type": "color",
+          "value": "rgb(240, 240, 240)",
+          "raw": "rgb(240, 240, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+          "source": "css"
+        },
+        "text": "ProductsCritical PowerCoolingS",
+        "layout": "3x1"
+      },
+      {
+        "tag": "MAIN",
+        "selector": "#maincontent",
+        "bounds": {
+          "x": 0,
+          "y": 213,
+          "width": 1192,
+          "height": 1403
+        },
+        "children": [
+          {
+            "tag": "DIV",
+            "selector": "#maincontent > div.columns > div > div:nth-child(5)",
+            "bounds": {
+              "x": 0,
+              "y": 213,
+              "width": 1192,
+              "height": 617
+            },
+            "children": [
+              {
+                "tag": "DIV",
+                "selector": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div.background-image-6a051aba9155b.background-image-6a051aba924a5",
+                "bounds": {
+                  "x": 0,
+                  "y": 213,
+                  "width": 1192,
+                  "height": 562
+                },
+                "children": [],
+                "className": "background-image-6a051aba9155b",
+                "background": {
+                  "type": "image",
+                  "value": "https://bodea-com548.adobedemo.com/media/wysiwyg/home-servers.jpg",
+                  "raw": "rgba(0, 0, 0, 0) url(\"https://bodea-com548.adobedemo.com/media/wysiwyg/home-servers.jpg\") no-repeat scroll 0% 0% / cover padding-box border-box",
+                  "source": "css"
+                }
+              },
+              {
+                "tag": "DIV",
+                "selector": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3)",
+                "bounds": {
+                  "x": 0,
+                  "y": 695,
+                  "width": 1192,
+                  "height": 136
+                },
+                "children": [
+                  {
+                    "tag": "H2",
+                    "selector": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3) > div > h2",
+                    "bounds": {
+                      "x": 20,
+                      "y": 720,
+                      "width": 1152,
+                      "height": 29
+                    },
+                    "children": [],
+                    "text": "Leading the way to the future "
+                  },
+                  {
+                    "tag": "DIV",
+                    "selector": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3) > div > div:nth-child(2)",
+                    "bounds": {
+                      "x": 20,
+                      "y": 768,
+                      "width": 1152,
+                      "height": 62
+                    },
+                    "children": [],
+                    "text": "Shop Now"
+                  }
+                ],
+                "background": {
+                  "type": "color",
+                  "value": "rgb(255, 255, 255)",
+                  "raw": "rgb(255, 255, 255) none no-repeat scroll 0% 0% / cover padding-box border-box",
+                  "source": "css"
+                }
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "selector": "#maincontent > div.columns > div > div:nth-child(6)",
+            "bounds": {
+              "x": 0,
+              "y": 830,
+              "width": 1192,
+              "height": 380
+            },
+            "children": [],
+            "text": "Energy Tactics for Telecom Net",
+            "layout": "2x1"
+          },
+          {
+            "tag": "DIV",
+            "selector": "#maincontent > div.columns > div > div:nth-child(7)",
+            "bounds": {
+              "x": 0,
+              "y": 1211,
+              "width": 1192,
+              "height": 336
+            },
+            "children": [
+              {
+                "tag": "H2",
+                "selector": "#maincontent > div.columns > div > div:nth-child(7) > div > div > div > div > h2",
+                "bounds": {
+                  "x": 0,
+                  "y": 1256,
+                  "width": 1192,
+                  "height": 29
+                },
+                "children": [],
+                "text": "Popular Products"
+              },
+              {
+                "tag": "DIV",
+                "selector": "#maincontent > div.columns > div > div:nth-child(7) > div > div > div > div > div",
+                "bounds": {
+                  "x": 0,
+                  "y": 1304,
+                  "width": 1192,
+                  "height": 222
+                },
+                "children": [],
+                "className": "pagebuilder-column-group",
+                "text": "Racker Blade Server The Racker",
+                "layout": "2x1"
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "selector": "#maincontent > div.columns > div > div:nth-child(8)",
+            "bounds": {
+              "x": 0,
+              "y": 1546,
+              "width": 1192,
+              "height": 70
+            },
+            "children": [],
+            "background": {
+              "type": "color",
+              "value": "rgb(240, 240, 240)",
+              "raw": "rgb(240, 240, 240) none no-repeat scroll 0% 0% / cover padding-box border-box",
+              "source": "css"
+            },
+            "text": "Any reference to Bodea its log"
+          }
+        ],
+        "id": "maincontent",
+        "className": "page-main-full-width"
+      },
+      {
+        "tag": "FOOTER",
+        "selector": "#html-body > div.page-wrapper > footer",
+        "bounds": {
+          "x": 0,
+          "y": 1616,
+          "width": 1192,
+          "height": 129
+        },
+        "children": [],
+        "className": "page-footer",
+        "background": {
+          "type": "color",
+          "value": "rgb(244, 244, 244)",
+          "raw": "rgb(244, 244, 244) none repeat scroll 0% 0% / auto padding-box border-box",
+          "source": "css"
+        },
+        "text": "Newsletter Sign Up for Our New",
+        "layout": "2x1"
+      },
+      {
+        "tag": "SMALL",
+        "selector": "#html-body > div.page-wrapper > small",
+        "bounds": {
+          "x": 0,
+          "y": 1745,
+          "width": 1192,
+          "height": 37
+        },
+        "children": [],
+        "className": "copyright",
+        "background": {
+          "type": "color",
+          "value": "rgb(84, 97, 106)",
+          "raw": "rgb(84, 97, 106) none repeat scroll 0% 0% / auto padding-box border-box",
+          "source": "css"
+        },
+        "text": "Copyright © 2013-present Magen"
+      }
+    ],
+    "id": "html-body",
+    "className": "cms-bodea-home",
+    "background": {
+      "type": "color",
+      "value": "rgb(255, 255, 255)",
+      "raw": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box",
+      "source": "css"
+    }
+  },
+  "text": "r @0,0 1192x1248\n  rc1 @0,0 1192x166\n    rc1c1 [2x2] [bg:color] @0,0 1192x43 \"My Store Quick Order Skip to C...\"\n    rc1c2 [3x1] @0,43 1192x123 \"Toggle Nav My Cart window.chec...\"\n  rc2 [3x1] [bg:color] @0,166 1192x47 \"ProductsCritical PowerCoolingS...\"\n  rc3 @0,213 1192x1403\n    rc3c1 @0,213 1192x617\n      rc3c1c1 [bg:image] @0,213 1192x562\n      rc3c1c2 @0,695 1192x136\n        rc3c1c2c1 @20,720 1152x29 \"Leading the way to the future ...\"\n        rc3c1c2c2 @20,768 1152x62 \"Shop Now\"\n    rc3c2 [2x1] @0,830 1192x380 \"Energy Tactics for Telecom Net...\"\n    rc3c3 @0,1211 1192x336\n      rc3c3c1 @0,1256 1192x29 \"Popular Products\"\n      rc3c3c2 [2x1] @0,1304 1192x222 \"Racker Blade Server The Racker...\"\n    rc3c4 [bg:color] @0,1546 1192x70 \"Any reference to Bodea its log...\"\n  rc4 [2x1] @0,1616 1192x129 \"Newsletter Sign Up for Our New...\"\n  rc5 [bg:color] @0,1745 1192x37 \"Copyright © 2013-present Magen...\"\n",
+  "nodeMap": {
+    "r": "#html-body",
+    "rc1": "#html-body > div.page-wrapper > header",
+    "rc1c1": "#html-body > div.page-wrapper > header > div.panel.wrapper",
+    "rc1c2": "#html-body > div.page-wrapper > header > div.header.content",
+    "rc2": "#html-body > div.page-wrapper > div",
+    "rc3": "#maincontent",
+    "rc3c1": "#maincontent > div.columns > div > div:nth-child(5)",
+    "rc3c1c1": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div.background-image-6a051aba9155b.background-image-6a051aba924a5",
+    "rc3c1c2": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3)",
+    "rc3c1c2c1": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3) > div > h2",
+    "rc3c1c2c2": "#maincontent > div.columns > div > div:nth-child(5) > div > div > div:nth-child(3) > div > div:nth-child(2)",
+    "rc3c2": "#maincontent > div.columns > div > div:nth-child(6)",
+    "rc3c3": "#maincontent > div.columns > div > div:nth-child(7)",
+    "rc3c3c1": "#maincontent > div.columns > div > div:nth-child(7) > div > div > div > div > h2",
+    "rc3c3c2": "#maincontent > div.columns > div > div:nth-child(7) > div > div > div > div > div",
+    "rc3c4": "#maincontent > div.columns > div > div:nth-child(8)",
+    "rc4": "#html-body > div.page-wrapper > footer",
+    "rc5": "#html-body > div.page-wrapper > small"
+  }
+}

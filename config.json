@@ -1,0 +1,32 @@
+{
+  "public": {
+    "default": {
+      "commerce-core-endpoint": "https://catalog-service.adobe.io/graphql",
+      "commerce-endpoint": "https://bodea-com548.adobedemo.com/graphql",
+      "commerce-store-view-code": "bodea_us",
+      "commerce-store-code": "bodea_store",
+      "commerce-website-code": "bodea",
+      "commerce-environment-id": "539925ad-37a7-45a3-8039-02864790c736",
+      "headers": {
+        "all": {},
+        "cs": {
+          "Magento-Environment-Id": "539925ad-37a7-45a3-8039-02864790c736",
+          "Magento-Store-Code": "bodea_store",
+          "Magento-Store-View-Code": "bodea_us",
+          "Magento-Website-Code": "bodea",
+          "x-api-key": "f7962fbaad9c47c59dd2d243dc91a829",
+          "Magento-Customer-Group": "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c"
+        }
+      },
+      "analytics": {
+        "environment-id": "539925ad-37a7-45a3-8039-02864790c736",
+        "store-code": "bodea_store",
+        "store-view-code": "bodea_us",
+        "website-code": "bodea",
+        "store-url": "https://bodea-com548.adobedemo.com",
+        "base-currency-code": "USD",
+        "environment": "Production"
+      }
+    }
+  }
+}

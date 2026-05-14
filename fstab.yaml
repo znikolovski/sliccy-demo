@@ -1,0 +1,7 @@
+mountpoints:
+  /:
+    url: https://content.da.live/znikolovski/sliccy-demo/
+    type: markup
+
+folders:
+  /products/: /products/default

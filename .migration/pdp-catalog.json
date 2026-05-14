@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "sku": "bodea-racker-blade-server",
+      "name": "Bodea Racker Blade Server",
+      "urlKey": "bodea-racker-blade-server",
+      "pagePath": "/racker-blade-server",
+      "catalogEndpoint": "https://catalog-service.adobe.io/graphql"
+    },
+    {
+      "sku": "bodea-vr-rack",
+      "name": "Bodea VR Rack",
+      "urlKey": "bodea-vr-rack",
+      "pagePath": "/vr-rack",
+      "catalogEndpoint": "https://catalog-service.adobe.io/graphql"
+    },
+    {
+      "sku": "lsps-01",
+      "name": "Lithium Standby Power Supply",
+      "urlKey": "lithium-standby-power-supply",
+      "pagePath": "/lithium-standby-power-supply",
+      "catalogEndpoint": "https://catalog-service.adobe.io/graphql"
+    }
+  ]
+}
