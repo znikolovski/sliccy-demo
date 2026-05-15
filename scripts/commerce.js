@@ -582,12 +582,16 @@ export async function commerceEndpointWithQueryParams() {
  */
 function getSkuFromUrl() {
   const path = window.location.pathname;
-  const result = path.match(/\/products\/[\w|-]+\/([\w|-]+)$/);
-  return result?.[1];
+  // Match /products/<urlKey>/<sku> OR /products/<sku> (when urlKey === sku)
+  const twoSegment = path.match(/\/products\/[\w|-]+\/([\w|-]+)$/);
+  if (twoSegment) return twoSegment[1];
+  const oneSegment = path.match(/\/products\/([\w|-]+)$/);
+  return oneSegment?.[1] ?? null;
 }
 
 export function getProductLink(urlKey, sku) {
-  return rootLink(`/products/${urlKey}/${sku}`.toLowerCase());
+  // Use /products/<sku> (BYOM folder mapping — sku === urlKey for Bodea)
+  return rootLink(`/products/${sku}`.toLowerCase());
 }
 
 /**
