@@ -5,7 +5,7 @@
     "offset": 0,
     "data": [
       {
-        "URL": "/products/bodea-racker-blade-server/bodea-racker-blade-server",
+        "URL": "/products/bodea-racker-blade-server",
         "title": "Bodea Racker Blade Server | Bodea",
         "description": "The Racker Blade server is a stripped-down server computer with a modular design optimized to minimize the use of physical space and energy.",
         "sku": "bodea-racker-blade-server",
@@ -15,7 +15,7 @@
         "template": "pdp"
       },
       {
-        "URL": "/products/bodea-vr-rack/bodea-vr-rack",
+        "URL": "/products/bodea-vr-rack",
         "title": "Bodea VR Rack | Bodea",
         "description": "The VR Rack is a powerful VR blade server that allows your users to create a playgroup anywhere in the world with modular, energy-efficient design.",
         "sku": "bodea-vr-rack",
@@ -25,7 +25,7 @@
         "template": "pdp"
       },
       {
-        "URL": "/products/lithium-standby-power-supply/lsps-01",
+        "URL": "/products/lsps-01",
         "title": "Lithium Standby Power Supply | Bodea",
         "description": "Enterprise-grade lithium standby power supply for mission-critical infrastructure with extended runtime and rapid recharge.",
         "sku": "lsps-01",
