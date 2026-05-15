@@ -1,4 +1,4 @@
-/* Hero block — full-width background image, no text overlay */
+/* Hero block — full-width background image with optional text overlay */
 
 .hero-wrapper {
   max-width: 100% !important;
@@ -12,6 +12,7 @@
   overflow: hidden;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 /* Row and cell: full coverage */
@@ -25,31 +26,65 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  line-height: 0;
+  position: relative;
 }
 
-/* Picture and img fill the block */
+/* Image fills the block */
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .hero picture {
   display: block;
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.hero img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 45vh;
-  object-fit: cover;
-  object-position: left top;
+/* Text overlay inside hero */
+.hero h2,
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  color: var(--color-text-light, #fff);
+  padding: 2rem;
+  margin: 0;
+  font-size: var(--heading-font-size-xl, 2.5rem);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-@media (width >= 900px) {
-  .hero {
-    min-height: 562px;
-  }
+.hero p {
+  position: relative;
+  z-index: 1;
+  padding: 0 2rem 2rem;
+  margin: 0;
+}
 
-  .hero img {
-    min-height: 562px;
-  }
+.hero p a {
+  background: var(--color-brand, #5a7a45);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background 0.2s;
+}
+
+.hero p a:hover {
+  background: var(--color-brand-dark, #4a6538);
+}
+
+/* When hero has text content, overlay on image */
+.hero > div > div:has(picture):has(h2),
+.hero > div > div:has(picture):has(h1) {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
