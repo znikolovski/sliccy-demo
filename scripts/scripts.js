@@ -103,17 +103,12 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  try {
-    // Race commerce initialization against a 6s timeout to prevent indefinite hang
-    await Promise.race([
-      initializeCommerce(),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Commerce init timed out')), 6000)),
-    ]);
-  } catch (e) {
-    // Commerce initialization failed (e.g., config fetch blocked or timed out), continue rendering
+  // Fire-and-forget commerce init: do not block page rendering on commerce setup.
+  // Commerce dropins will initialize async in the background once config is fetched.
+  initializeCommerce().catch((e) => {
     // eslint-disable-next-line no-console
-    console.warn('Commerce initialization failed, continuing page render:', e.message);
-  }
+    console.warn('Commerce initialization failed:', e.message);
+  });
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
