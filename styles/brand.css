@@ -1,24 +1,71 @@
-/* Bodea Inc. brand tokens — generated from bodea-com548.adobedemo.com */
+/* Bodea Inc. brand tokens  sourced from bodea-com548.adobedemo.com */
+
+/* Open Sans  self-hosted subset matching the original Magento Luma stack */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0C4nY1M2xLer.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLer.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1C4nY1M2xLer.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1C4nY1M2xLer.woff2") format("woff2");
+}
+
 :root {
+  /* Typography  matches bodea-com548 Magento Luma stack */
   --heading-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --body-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Base colors */
   --background-color: #ffffff;
   --text-color: #333333;
   --link-color: #006bb4;
   --link-hover-color: #006bb4;
-  --section-padding: 40px;
-  --nav-height: 47px;
 
-  /* Bodea brand colors */
-  --color-brand-primary: #5a7a45;
-  --color-nav-bg: #5a7a45;
-  --color-panel-bg: #54616a;
+  /* Layout */
+  --section-padding: 40px;
+  --nav-height: 132px; /* utility bar ~32px + logo row ~56px + nav bar ~44px */
+
+  /* Bodea brand colors  sourced from live computed styles */
+  --color-brand-primary: #35b28c;   /* nav bar teal/green  was wrong (#5a7a45) */
+  --color-nav-bg: #35b28c;          /* nav sections background */
+  --color-panel-bg: #54616a;        /* top utility bar */
   --color-dark-bg: #333333;
   --color-light-bg: #f5f5f5;
-  --color-card-bg: #5a7a45;
+  --color-card-bg: #35b28c;         /* product card bg  matches nav */
   --color-card-text: #ffffff;
-  --color-footer-bg: #333333;
-  --color-footer-text: #ffffff;
+  --color-footer-bg: #f4f4f4;       /* original footer is light grey, not dark */
+  --color-footer-text: #333333;
+  --color-footer-border: #cecece;
+
+  /* Button colors */
+  --color-btn-primary-bg: #1979c3;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-secondary-bg: #eeeeee;
+  --color-btn-secondary-text: #333333;
+  --color-btn-secondary-border: #cccccc;
 }
 
 html, body { overflow: auto !important; }
