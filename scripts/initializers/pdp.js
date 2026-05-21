@@ -82,7 +82,7 @@ await initializeDropin(async () => {
   preloadPDPAssets();
 
   // Set Fetch Endpoint (Service)
-  setEndpoint(await commerceEndpointWithQueryParams());
+  setEndpoint(getConfigValue('commerce-core-endpoint'));
 
   // Set Fetch Headers (Service)
   setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs') }));
