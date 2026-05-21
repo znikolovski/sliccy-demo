@@ -80,7 +80,7 @@ main .columns a.button:any-link {
   display: inline-block;
   background-color: #eeeeee;
   border: 1px solid #cccccc;
-  border-radius: 3px;
+  border-radius: 0;
   color: #333333;
   font-size: 14px;
   font-weight: 400;
