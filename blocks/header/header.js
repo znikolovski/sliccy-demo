@@ -129,8 +129,11 @@ function normaliseNavFragment(fragment) {
 
   if (children.length === 1) {
     // Single-div DA structure: <div> logo-p + nav-ul [+ tools-ul] </div>
+    // Or: <div> logo-picture (direct) + nav-ul </div>
     const singleDiv = children[0];
-    const logoPara = singleDiv.querySelector(':scope > p:first-child');
+    // Logo may be in a <p> or directly as <picture>
+    const logoPara = singleDiv.querySelector(':scope > p:first-child')
+      || singleDiv.querySelector(':scope > picture:first-child')?.closest('div');
     const navUl = singleDiv.querySelector(':scope > ul:first-of-type');
     // A second ul may carry tools links (sign-in, cart&)
     const toolsUl = singleDiv.querySelectorAll(':scope > ul')[1];
@@ -227,8 +230,24 @@ export default async function decorate(block) {
     }
   }
 
+  // Strip button decoration from brand link if present
+  if (navBrand) {
+    navBrand.querySelectorAll('.button-container').forEach((bc) => bc.classList.remove('button-container'));
+    navBrand.querySelectorAll('a.button').forEach((btn) => btn.classList.remove('button', 'primary', 'secondary'));
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    // Strip button/button-container decoration from nav links added by decorateButtons.
+    // DA-sourced nav items arrive as <li><p class="button-container"><a class="button">&
+    // We need plain <a> links for correct nav styling.
+    navSections.querySelectorAll('.button-container').forEach((bc) => {
+      bc.classList.remove('button-container');
+    });
+    navSections.querySelectorAll('a.button').forEach((btn) => {
+      btn.classList.remove('button', 'primary', 'secondary');
+    });
+
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
