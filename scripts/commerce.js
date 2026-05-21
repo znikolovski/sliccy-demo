@@ -320,7 +320,7 @@ function buildTemplateColumns(doc) {
  * @param {Element} doc The document element
  */
 export function applyTemplates(doc) {
-  if (doc.body.classList.contains('columns')) {
+  if (doc.classList.contains('columns')) {
     buildTemplateColumns(doc);
   }
 }
