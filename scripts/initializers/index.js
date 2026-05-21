@@ -54,7 +54,7 @@ const stripMagentoHeadersOnGet = (requestInit) => {
   if (requestInit.method === 'GET') {
     const headers = { ...requestInit.headers };
     Object.keys(headers).forEach((key) => {
-      if (key.toLowerCase().startsWith('magento-')) {
+      if (key.toLowerCase().startsWith('magento-') || key.toLowerCase() === 'content-type') {
         delete headers[key];
       }
     });
