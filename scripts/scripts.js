@@ -41,6 +41,139 @@ function buildHeroBlock(main) {
 }
 
 /**
+ * Auto-builds a columns block from flat DA content.
+ *
+ * The DA document for the homepage delivers the "Energy Tactics" promo
+ * as flat paragraphs (no authored table block), so we detect it by the
+ * h2 text and synthesise the two-column block structure in-place:
+ *
+ *   <div class="columns">
+ *     <div>                     ← row
+ *       <div>text content</div> ← left cell (grey bg via CSS)
+ *       <div><picture/></div>   ← right cell (image)
+ *     </div>
+ *   </div>
+ *
+ * The block is inserted in-place where the h2 was, inside the same
+ * section div. decorateSections will wrap it in a block-wrapper div,
+ * and decorateBlocks will load the columns CSS/JS.
+ *
+ * @param {Element} main The main element
+ */
+function buildColumnsBlock(main) {
+  // Find the h2 that marks the start of the Energy Tactics promo
+  const h2 = [...main.querySelectorAll('h2')].find(
+    (el) => el.textContent.trim().toLowerCase().includes('energy tactics'),
+  );
+  if (!h2) return;
+  // Skip if already inside a columns block (idempotent)
+  if (h2.closest('.columns')) return;
+
+  const parentSection = h2.parentElement;
+  if (!parentSection) return;
+
+  // Collect siblings after h2 until we hit the next heading or find the image
+  // Expected sequence: p(body text), p(CTA link), p(img/picture)
+  const textNodes = [];
+  let imgPara = null;
+  let cursor = h2.nextElementSibling;
+  while (cursor) {
+    const tag = cursor.tagName.toLowerCase();
+    if (tag === 'h2' || tag === 'h3' || tag === 'h1') break;
+    if (cursor.querySelector('picture, img')) {
+      imgPara = cursor;
+      cursor = cursor.nextElementSibling;
+      break;
+    }
+    textNodes.push(cursor);
+    cursor = cursor.nextElementSibling;
+  }
+
+  // Need at least the h2 and an image paragraph to build the block
+  if (!imgPara) return;
+
+  // Build left cell: h2 + text paragraphs
+  const leftCell = document.createElement('div');
+  leftCell.append(h2);
+  textNodes.forEach((n) => leftCell.append(n));
+
+  // Build right cell: picture (unwrap from <p> if needed)
+  const rightCell = document.createElement('div');
+  const picture = imgPara.querySelector('picture');
+  if (picture) {
+    rightCell.append(picture);
+    imgPara.remove();
+  } else {
+    rightCell.append(imgPara);
+  }
+
+  // Assemble the columns block
+  const row = document.createElement('div');
+  row.append(leftCell, rightCell);
+  const block = document.createElement('div');
+  block.classList.add('columns');
+  block.append(row);
+
+  // Insert the block in-place where the h2 was (h2 is now inside leftCell).
+  // cursor points to the element after all consumed nodes; insert before it,
+  // or append to the parent if cursor is null.
+  if (cursor && cursor.parentElement === parentSection) {
+    parentSection.insertBefore(block, cursor);
+  } else {
+    parentSection.append(block);
+  }
+}
+
+/**
+ * Converts raw "style / dark" paragraph pairs into a proper section-metadata
+ * block that aem.js decorateSections can consume.
+ *
+ * The DA document emits key/value metadata as plain <p> pairs instead of a
+ * recognised block table. EDS decorateSections only processes
+ * <div class="section-metadata">. We detect the pattern and synthesise that
+ * structure before decorateSections runs.
+ *
+ * Handles two authoring variants:
+ *   (a) <p>style</p> <p>dark</p>  → full key/value pair
+ *   (b) <p>dark</p>               → bare value shorthand (adds class directly)
+ *
+ * @param {Element} main The main element
+ */
+function buildSectionMetadata(main) {
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const paragraphs = [...section.querySelectorAll('p')];
+    let i = 0;
+    while (i < paragraphs.length) {
+      const p = paragraphs[i];
+      const key = p.textContent.trim().toLowerCase();
+      if (key === 'style') {
+        // Next paragraph should be the value (e.g. "dark")
+        const next = paragraphs[i + 1];
+        if (next) {
+          // Build a proper section-metadata block
+          const keyCell = document.createElement('div');
+          keyCell.textContent = p.textContent.trim();
+          const valCell = document.createElement('div');
+          valCell.textContent = next.textContent.trim();
+          const metaRow = document.createElement('div');
+          metaRow.append(keyCell, valCell);
+          const metaBlock = document.createElement('div');
+          metaBlock.classList.add('section-metadata');
+          metaBlock.append(metaRow);
+          // Replace the key paragraph with the block; remove the value paragraph
+          p.replaceWith(metaBlock);
+          next.remove();
+          i += 2;
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+      }
+      i += 1;
+    }
+  });
+}
+
+/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
@@ -77,6 +210,8 @@ function buildAutoBlocks(main) {
     }
 
     buildHeroBlock(main);
+    buildColumnsBlock(main);
+    buildSectionMetadata(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
