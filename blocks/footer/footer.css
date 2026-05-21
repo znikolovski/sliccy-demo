@@ -50,7 +50,9 @@ footer .footer img {
   height: auto;
   display: block;
   /* Invert to white on the dark background */
-  filter: brightness(0) invert(1);
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 2px;
 }
 
 footer .footer p {
