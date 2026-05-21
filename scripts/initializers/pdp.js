@@ -1,1 +1,1 @@
-test
+import { getConfigValue, getHeaders } from '@dropins/tools/lib/aem/configs.
