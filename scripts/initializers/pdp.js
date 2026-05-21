@@ -105,11 +105,86 @@ await initializeDropin(async () => {
     },
   };
 
-  const models = {
-    ProductDetails: {
-      initialData: { ...product },
-    },
-  };
+const models = {
+ProductDetails: {
+initialData: { ...product },
+\/\/ Demo environment: catalog-service reports all variants as out-of-stock
+\/\/ Override inStock to true so options are selectable in the PDP dropdown.
+transformer: (data) => {
+if (!data?.options) return null;
+return {
+options: data.options.map((option) => ({
+...option,
+items: (option.items ?? []).map((item) => ({ ...item, inStock: true })),
+})),
+};
+},
+},
+};
+const models = {
+ProductDetails: {
+initialData: { ...product },
+\/\/ Demo environment: catalog-service reports all variants as out-of-stock
+\/\/ Override inStock to true so options are selectable in the PDP dropdown.
+transformer: (data) => {
+if (!data?.options) return null;
+return {
+options: data.options.map((option) => ({
+...option,
+items: (option.items ?? []).map((item) => ({ ...item, inStock: true })),
+})),
+};
+},
+},
+};
+const models = {
+ProductDetails: {
+initialData: { ...product },
+\/\/ Demo environment: catalog-service reports all variants as out-of-stock
+\/\/ Override inStock to true so options are selectable in the PDP dropdown.
+transformer: (data) => {
+if (!data?.options) return null;
+return {
+options: data.options.map((option) => ({
+...option,
+items: (option.items ?? []).map((item) => ({ ...item, inStock: true })),
+})),
+};
+},
+},
+};
+const models = {
+ProductDetails: {
+initialData: { ...product },
+\/\/ Demo environment: catalog-service reports all variants as out-of-stock
+\/\/ Override inStock to true so options are selectable in the PDP dropdown.
+transformer: (data) => {
+if (!data?.options) return null;
+return {
+options: data.options.map((option) => ({
+...option,
+items: (option.items ?? []).map((item) => ({ ...item, inStock: true })),
+})),
+};
+},
+},
+};
+const models = {
+ProductDetails: {
+initialData: { ...product },
+\/\/ Demo environment: catalog-service reports all variants as out-of-stock
+\/\/ Override inStock to true so options are selectable in the PDP dropdown.
+transformer: (data) => {
+if (!data?.options) return null;
+return {
+options: data.options.map((option) => ({
+...option,
+items: (option.items ?? []).map((item) => ({ ...item, inStock: true })),
+})),
+};
+},
+},
+};
 
   // Initialize Dropins
   return initializers.mountImmediately(initialize, {
