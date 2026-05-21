@@ -1,71 +1,68 @@
 import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
 
 /**
- * Builds the newsletter form in the footer.
- * @param {Element} block The footer block element
+ * Fixes relative media URLs produced by DA (e.g. ./media_*.png).
+ * @param {Element} el       The element to search within
+ * @param {string}  basePath The footer page path used as the URL base
  */
-function buildNewsletterForm(block) {
-  // Find the newsletter section (first section, second child div)
-  const section = block.querySelector('.section:first-child > div');
-  if (!section) return;
-
-  const newsletterCol = section.querySelector('div');
-  if (!newsletterCol) return;
-
-  // Replace the placeholder paragraph with an actual email input form
-  const placeholderP = newsletterCol.querySelector('p:nth-child(2)');
-  if (placeholderP) {
-    const form = document.createElement('form');
-    form.classList.add('newsletter-form');
-    form.setAttribute('action', '#');
-    form.setAttribute('method', 'post');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = form.querySelector('input[type="email"]');
-      if (input && input.value) {
-        input.value = '';
-        input.placeholder = 'Thank you for subscribing!';
-      }
-    });
-
-    const input = document.createElement('input');
-    input.type = 'email';
-    input.name = 'email';
-    input.placeholder = 'Enter your email address';
-    input.required = true;
-    input.setAttribute('aria-label', 'Email address');
-
-    const btn = document.createElement('button');
-    btn.type = 'submit';
-    btn.textContent = 'Subscribe';
-
-    form.append(input, btn);
-    placeholderP.replaceWith(form);
-  }
-
-  // Remove the subscribe link button-container (replaced by form above)
-  const btnContainer = newsletterCol.querySelector('.button-container');
-  if (btnContainer) btnContainer.remove();
+function fixMediaUrls(el, basePath) {
+  const base = new URL(basePath, window.location.href);
+  el.querySelectorAll('img[src^="./media_"]').forEach((img) => {
+    img.src = new URL(img.getAttribute('src'), base).href;
+  });
+  el.querySelectorAll('source[srcset^="./media_"]').forEach((source) => {
+    source.srcset = source.getAttribute('srcset').split(',').map((part) => {
+      const trimmed = part.trim();
+      const spaceIdx = trimmed.indexOf(' ');
+      if (spaceIdx === -1) return new URL(trimmed, base).href;
+      const url = trimmed.slice(0, spaceIdx);
+      const descriptor = trimmed.slice(spaceIdx);
+      return new URL(url, base).href + descriptor;
+    }).join(', ');
+  });
 }
 
 /**
- * loads and decorates the footer
+ * Loads and decorates the footer block.
+ *
+ * We deliberately avoid `loadFragment` here because the DA footer page
+ * (`/footer.plain.html`) contains a `<div class="footer">` block inside it.
+ * If we used `loadFragment` → `loadBlocks`, EDS would try to load the `footer`
+ * block again → infinite recursion.  Instead we fetch and parse the HTML
+ * directly, then unwrap the inner block wrapper so the content lands
+ * directly inside the outer EDS-managed `footer .footer` element.
+ *
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
+  const footerPath = footerMeta
+    ? new URL(footerMeta, window.location.href).pathname
+    : '/footer';
 
-  // decorate footer DOM
+  let content = null;
+  try {
+    const resp = await fetch(`${footerPath}.plain.html`);
+    if (resp.ok) {
+      const html = await resp.text();
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+
+      // Fix relative media URLs before moving nodes into the live DOM
+      fixMediaUrls(tmp, footerPath);
+
+      // The DA footer page wraps everything in a `<div class="footer">` block.
+      // Unwrap it so we don't end up with a nested .footer inside .footer.
+      const innerBlock = tmp.querySelector('.footer');
+      content = innerBlock || tmp;
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('Footer loading failed', e);
+  }
+
+  if (!content) return;
+
   block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-
-  block.append(footer);
-
-  // Build newsletter form
-  buildNewsletterForm(block);
+  block.append(...content.childNodes);
 }
