@@ -1,7 +1,7 @@
 /* Footer block */
 footer {
-  background-color: #333333;
-  color: #ffffff;
+  background-color: var(--color-footer-bg, #f4f4f4);
+  color: var(--color-footer-text, #333333);
   font-size: var(--body-font-size-xs);
 }
 
@@ -39,14 +39,14 @@ footer .footer .section:first-child > div > ul li {
 }
 
 footer .footer .section:first-child > div > ul a:any-link {
-  color: #ffffff;
+  color: #575757;
   text-decoration: none;
   font-size: 14px;
 }
 
 footer .footer .section:first-child > div > ul a:hover {
   text-decoration: underline;
-  color: #cccccc;
+  color: #333333;
 }
 
 /* Newsletter column */
@@ -58,7 +58,7 @@ footer .footer .section:first-child > div > div {
 
 footer .footer .section:first-child > div > div p {
   margin: 0;
-  color: #ffffff;
+  color: #333333;
 }
 
 footer .footer .section:first-child > div > div p strong {
@@ -70,7 +70,7 @@ footer .footer .section:first-child > div > div p strong {
 
 /* Newsletter email input row */
 footer .footer .section:first-child > div > div p:nth-child(2) {
-  display: none; /* placeholder text — replaced by JS-injected input */
+  display: none; /* placeholder text  replaced by JS-injected input */
 }
 
 /* Subscribe button */
