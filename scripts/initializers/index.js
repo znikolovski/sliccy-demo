@@ -3,6 +3,7 @@ import { getCookie } from '@dropins/tools/lib.js';
 import { getConfigValue } from '@dropins/tools/lib/aem/configs.js';
 import { events } from '@dropins/tools/event-bus.js';
 import {
+  addBeforeHook,
   removeFetchGraphQlHeader,
   setEndpoint,
   setFetchGraphQlHeader,
@@ -47,6 +48,21 @@ const setupAemAssetsImageParams = () => {
   }
 };
 
+// Strip Magento-specific headers from GET requests (e.g. storeConfig queries)
+// to avoid triggering CORS preflight on endpoints that return 500 on OPTIONS.
+const stripMagentoHeadersOnGet = (requestInit) => {
+  if (requestInit.method === 'GET') {
+    const headers = { ...requestInit.headers };
+    Object.keys(headers).forEach((key) => {
+      if (key.toLowerCase().startsWith('magento-')) {
+        delete headers[key];
+      }
+    });
+    return { ...requestInit, headers };
+  }
+  return requestInit;
+};
+
 export default async function initializeDropins() {
   const init = async () => {
     // Set auth headers on authenticated event
@@ -64,6 +80,9 @@ export default async function initializeDropins() {
     events.enableLogger(true);
     // Set Fetch Endpoint (Global)
     setEndpoint(getConfigValue('commerce-core-endpoint') || getConfigValue('commerce-endpoint'));
+
+    // Strip Magento-* headers from GET requests to avoid preflight CORS failures
+    addBeforeHook(stripMagentoHeadersOnGet);
 
     // Set up AEM Assets image parameter conversion
     setupAemAssetsImageParams();
