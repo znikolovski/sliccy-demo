@@ -51,25 +51,15 @@ header nav[aria-expanded='true'] {
     flex-direction: column;
   }
 
-  /* Row 0: utility / tools bar  full bleed dark bg */
-  header .nav-wrapper::before {
-    content: '';
-    display: block;
-    background-color: #54616a;
-    height: 0;          /* height comes from the tools row in the grid */
-    width: 100%;
-  }
-
+  /* Desktop nav: 3-row layout via grid
+     Row 1 (tools): dark utility bar  ’ nav-tools fills row with #54616a bg
+     Row 2 (brand): white logo row    ’ nav-brand fills row with #fff bg
+     Row 3 (sections): teal nav bar   ’ nav-sections fills row with #35b28c bg */
   header nav,
   header nav[aria-expanded='true'] {
     display: grid;
-    /* Row 0: tools (full width, dark bg)
-       Row 1: logo row (white)
-       Row 2: nav sections (teal) */
-    grid-template:
-      'tools tools tools' 36px
-      '. brand .' 72px
-      'sections sections sections' 44px / 1fr auto 1fr;
+    grid-template-rows: 36px 72px 44px;
+    grid-template-columns: 1fr;
     align-items: stretch;
     gap: 0;
     max-width: 100%;
@@ -77,6 +67,7 @@ header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
     width: 100%;
+    /* No named areas  items placed by explicit grid-row */
   }
 }
 
@@ -188,13 +179,14 @@ header .nav-brand {
     justify-content: flex-start;
     padding: 0 24px;
     background-color: #fff;
-    /* Span full width so white bg fills the logo row */
-    grid-column: 1 / -1;
     grid-row: 2;
+    grid-column: 1;
+    /* Inner constraint to align logo with max-width */
     max-width: 1248px;
-    margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
+    /* Center the inner content at max-width while bg fills full row */
+    margin: 0 auto;
   }
 }
 
@@ -218,32 +210,8 @@ header nav .nav-brand p:only-child {
   white-space: nowrap;
 }
 
-/* White background fill for logo row on desktop */
-@media (width >= 900px) {
-  header .nav-wrapper {
-    /* Creates the 3-tier visual stack */
-  }
-
-  /* Pseudo full-width white bg for logo row */
-  header nav::before {
-    content: '';
-    display: block;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    background-color: #fff;
-    align-self: stretch;
-  }
-
-  /* Pseudo full-width teal bg for nav row */
-  header nav::after {
-    content: '';
-    display: block;
-    grid-column: 1 / -1;
-    grid-row: 3;
-    background-color: #35b28c;
-    align-self: stretch;
-  }
-}
+/* White background fill for logo row on desktop: handled by nav-brand span + bg color */
+/* Teal background for nav row: handled by nav-sections span + bg color */
 
 /* ---- Tools (utility bar) ---- */
 header nav .nav-tools {
@@ -328,9 +296,8 @@ header nav .nav-tools p + p::before {
 /* Desktop: utility bar  dark background, right-aligned, full width */
 @media (width >= 900px) {
   header nav .nav-tools {
-    grid-area: tools;
-    grid-column: 1 / -1;
     grid-row: 1;
+    grid-column: 1;
     background-color: #54616a;
     justify-content: flex-end;
     padding: 0 24px;
@@ -424,10 +391,12 @@ header nav .nav-sections ul > li > ul > li {
     white-space: nowrap;
     padding: 0;
     align-self: stretch;
-    grid-column: 1 / -1;
+    grid-column: 1;
     grid-row: 3;
     background-color: #35b28c;
     z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
