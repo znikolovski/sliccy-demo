@@ -1,10 +1,12 @@
-/* Footer block */
+/* ─── Footer block ─────────────────────────────────────────────────────────── */
+
 footer {
-  background-color: var(--color-footer-bg, #f4f4f4);
-  color: var(--color-footer-text, #333333);
-  font-size: var(--body-font-size-xs);
+  background-color: #333333;
+  color: #cccccc;
+  font-size: 14px;
 }
 
+/* Hide until block JS has finished loading */
 footer .footer {
   visibility: hidden;
 }
@@ -13,166 +15,84 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
-/* Main content section: 2-col layout */
-footer .footer .section:first-child > div {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+/* ─── 3-column grid row ─────────────────────────────────────────────────────── */
+/* Structure after footer.js runs:
+     footer > .footer.block > div (row) > div (col1) + div (col2) + div (col3) */
+
+footer .footer > div {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 24px 32px;
+  padding: 48px 24px 40px;
+  box-sizing: border-box;
 }
 
-/* Nav links column */
-footer .footer .section:first-child > div > ul {
+@media (width < 900px) {
+  footer .footer > div {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+}
+
+/* ─── Column 1: logo + tagline ──────────────────────────────────────────────── */
+
+footer .footer > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+footer .footer img {
+  max-width: 160px;
+  height: auto;
+  display: block;
+  /* Invert to white on the dark background */
+  filter: brightness(0) invert(1);
+}
+
+footer .footer p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ─── Columns 2 & 3: nav link lists ─────────────────────────────────────────── */
+
+footer .footer h3 {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+}
+
+footer .footer ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-footer .footer .section:first-child > div > ul li {
+footer .footer ul li {
   margin: 0;
   padding: 0;
 }
 
-footer .footer .section:first-child > div > ul a:any-link {
-  color: #575757;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-footer .footer .section:first-child > div > ul a:hover {
-  text-decoration: underline;
-  color: #333333;
-}
-
-/* Newsletter column */
-footer .footer .section:first-child > div > div {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-footer .footer .section:first-child > div > div p {
-  margin: 0;
-  color: #333333;
-}
-
-footer .footer .section:first-child > div > div p strong {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Newsletter email input row */
-footer .footer .section:first-child > div > div p:nth-child(2) {
-  display: none; /* placeholder text  replaced by JS-injected input */
-}
-
-/* Subscribe button */
-footer .footer .section:first-child .button-container {
-  display: inline-block;
-  margin: 0;
-}
-
-footer .footer .section:first-child a.button:any-link {
-  display: inline-block;
-  background-color: #1979c3;
-  color: #ffffff;
-  border: 2px solid #1979c3;
-  border-radius: 3px;
-  padding: 8px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-footer .footer .section:first-child a.button:hover {
-  background-color: #1360a4;
-  border-color: #1360a4;
-}
-
-/* Newsletter form */
-footer .footer .newsletter-form {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-footer .footer .newsletter-form input[type="email"] {
-  flex: 1;
-  min-width: 200px;
-  padding: 8px 12px;
-  border: 1px solid #666666;
-  border-radius: 3px;
-  background: #ffffff;
-  color: #333333;
-  font-size: 14px;
-}
-
-footer .footer .newsletter-form input[type="email"]::placeholder {
-  color: #999999;
-}
-
-footer .footer .newsletter-form button {
-  background-color: #1979c3;
-  color: #ffffff;
-  border: 2px solid #1979c3;
-  border-radius: 3px;
-  padding: 8px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-footer .footer .newsletter-form button:hover {
-  background-color: #1360a4;
-  border-color: #1360a4;
-}
-
-/* Copyright bar */
-footer .footer .section:last-child {
-  background-color: #222222;
-}
-
-footer .footer .section:last-child > div {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 24px;
-}
-
-footer .footer .section:last-child p {
-  margin: 0;
+footer .footer ul a:any-link {
   color: #aaaaaa;
-  font-size: 13px;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
-/* Desktop: 2-column layout */
-@media (width >= 900px) {
-  footer .footer .section:first-child > div {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 40px 32px 32px;
-  }
-
-  footer .footer .section:first-child > div > ul {
-    min-width: 200px;
-  }
-
-  footer .footer .section:last-child > div {
-    padding: 16px 32px;
-  }
+footer .footer ul a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
