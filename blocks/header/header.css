@@ -299,15 +299,30 @@ header nav .nav-tools ul > li + li::before {
   }
 }
 
-header nav .nav-tools ul > li > a {
+header nav .nav-tools ul > li > a,
+header nav .nav-tools p > a {
   color: #54616a;
   font-size: 13px;
   font-weight: 400;
 }
 
-header nav .nav-tools ul > li > a:hover {
+header nav .nav-tools ul > li > a:hover,
+header nav .nav-tools p > a:hover {
   color: #35b28c;
   text-decoration: underline;
+}
+
+/* Handle p tags in tools (DA may use p instead of ul/li) */
+header nav .nav-tools p {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+header nav .nav-tools p + p::before {
+  content: '|';
+  padding: 0 6px;
+  color: #ccc;
 }
 
 /* Desktop: utility bar  dark background, right-aligned, full width */
@@ -324,21 +339,25 @@ header nav .nav-tools ul > li > a:hover {
     box-sizing: border-box;
   }
 
-  header nav .nav-tools ul > li > a {
+  header nav .nav-tools ul > li > a,
+  header nav .nav-tools p > a {
     color: #f2f2f2;
     font-size: 13px;
   }
 
-  header nav .nav-tools ul > li > a:hover {
+  header nav .nav-tools ul > li > a:hover,
+  header nav .nav-tools p > a:hover {
     color: #fff;
     text-decoration: underline;
   }
 
-  header nav .nav-tools ul > li + li::before {
+  header nav .nav-tools ul > li + li::before,
+  header nav .nav-tools p + p::before {
     color: #8a9399;
   }
 
-  header nav .nav-tools ul > li {
+  header nav .nav-tools ul > li,
+  header nav .nav-tools p {
     color: #f2f2f2;
   }
 }
@@ -452,12 +471,22 @@ header nav .nav-sections ul > li > ul > li {
     background-color: rgba(0, 0, 0, 0.12);
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > a {
+  /* Direct link OR link inside a p (DA button-container pattern) */
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > p > a {
     color: #fff;
     font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+  }
+
+  /* Remove default p margin in nav items */
+  header nav .nav-sections .default-content-wrapper > ul > li > p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
   /* Dropdown caret */
@@ -510,16 +539,22 @@ header nav .nav-sections ul > li > ul > li {
     font-weight: 400;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > p > a {
     display: block;
     padding: 10px 20px;
     color: #333;
     font-size: 14px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover {
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover,
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > p > a:hover {
     background-color: #f5f5f5;
     color: #35b28c;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > p {
+    margin: 0;
   }
 
   /* Nested submenu */
