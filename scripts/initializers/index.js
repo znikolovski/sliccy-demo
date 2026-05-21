@@ -63,7 +63,7 @@ export default async function initializeDropins() {
     // Event Bus Logger
     events.enableLogger(true);
     // Set Fetch Endpoint (Global)
-    setEndpoint(getConfigValue('commerce-core-endpoint') || getConfigValue('commerce-endpoint'));
+    setEndpoint(getConfigValue('commerce-endpoint'));
 
     // Set up AEM Assets image parameter conversion
     setupAemAssetsImageParams();
@@ -81,7 +81,7 @@ export default async function initializeDropins() {
       // Recaptcha
       await import('@dropins/tools/recaptcha.js').then((recaptcha) => {
         recaptcha.enableLogger(true);
-        recaptcha.setEndpoint(getConfigValue('commerce-core-endpoint') || getConfigValue('commerce-endpoint'));
+        recaptcha.setEndpoint(getConfigValue('commerce-endpoint'));
         return recaptcha.setConfig();
       });
     });
