@@ -1,10 +1,10 @@
 /* ============================================================
-   Bodea / Luma Header — EDS header block
+   Bodea / Luma Header  EDS header block
    Source: bodea-com548.adobedemo.com
    
    Structure: two-tier
      Row 1: logo (center) + tools (right) on white bg
-     Row 2: nav sections on teal (#5a7a45) bg
+     Row 2: nav sections on teal (#35b28c) bg
    ============================================================ */
 
 /* ---- Wrapper ---- */
@@ -184,7 +184,7 @@ header nav .nav-sections {
   grid-area: sections;
   display: none;
   visibility: hidden;
-  background-color: #5a7a45;
+  background-color: #35b28c;
 }
 
 header nav[aria-expanded='true'] .nav-sections {
@@ -245,7 +245,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: stretch;
-    background-color: #5a7a45;
+    background-color: #35b28c;
     border-top: none;
   }
 
@@ -348,7 +348,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a:hover {
     background-color: #f5f5f5;
-    color: #5a7a45;
+    color: #35b28c;
   }
 
   /* Nested submenu (e.g. Servers and Racks) */
@@ -370,7 +370,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > ul > li > a:hover {
     background-color: #f5f5f5;
-    color: #5a7a45;
+    color: #35b28c;
   }
 }
 
@@ -434,7 +434,7 @@ header nav .nav-tools ul > li > a {
 }
 
 header nav .nav-tools ul > li > a:hover {
-  color: #5a7a45;
+  color: #35b28c;
   text-decoration: underline;
 }
 
