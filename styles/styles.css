@@ -335,3 +335,25 @@ main .section.highlight {
   color: var(--link-color); font-size: inherit; font-weight: inherit;
   padding: 0; margin: 0; text-decoration: underline; white-space: normal;
 }
+
+/* dark section  applied via section metadata "style: dark" */
+main .section.dark {
+  background-color: #333333;
+  color: #ffffff;
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3 {
+  color: #ffffff;
+}
+
+main .section.dark a:any-link {
+  color: #cccccc;
+}
+
+main .section.dark a:hover {
+  color: #ffffff;
+}
