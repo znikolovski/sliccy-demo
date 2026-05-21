@@ -1,6 +1,6 @@
 import { getHeaders } from '@dropins/tools/lib/aem/configs.js';
 import { initializers } from '@dropins/tools/initializer.js';
-import { initialize, setFetchGraphQlHeaders } from '@dropins/storefront-wishlist/api.js';
+import { initialize, setEndpoint, setFetchGraphQlHeaders } from '@dropins/storefront-wishlist/api.js';
 import { initializeDropin } from './index.js';
 import { fetchPlaceholders } from '../commerce.js';
 
