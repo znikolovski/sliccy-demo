@@ -62,4 +62,101 @@ function preloadPDPAssets() {
   preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductPrice.js', 'script');
   preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductShortDescription.js', 'script');
   preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductOptions.js', 'script');
-  preloadFi
+  preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductQuantity.js', 'script');
+  preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductDescription.js', 'script');
+  preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductAttributes.js', 'script');
+  preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductGallery.js', 'script');
+
+  // Extract and preload main product image
+  const imageUrl = extractMainImageUrl();
+
+  if (imageUrl) {
+    preloadFile(imageUrl, 'image');
+  } else {
+    console.warn('Unable to infer main image from JSON-LD or meta tags');
+  }
+}
+
+await initializeDropin(async () => {
+  // Preload PDP assets immediately when this module is imported
+  preloadPDPAssets();
+
+  // Set Fetch Endpoint (Service)
+  setEndpoint(getConfigValue('commerce-core-endpoint'));
+
+  // Set Fetch Headers (Service)
+  setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('cs') }));
+
+  const sku = getProductSku();
+  const optionsUIDs = getOptionsUIDsFromUrl();
+
+  const [product, labels] = await Promise.all([
+    fetchProductData(sku, { optionsUIDs, skipTransform: true }).then(preloadImageMiddleware),
+    fetchPlaceholders('placeholders/pdp.json'),
+  ]);
+
+  if (!product?.sku) {
+    return loadErrorPage();
+  }
+
+  // Demo environment: catalog-service reports all variants as out-of-stock because
+  // the Magento backend has no active inventory. Patch the raw product data so all
+  // option values appear as in-stock, making the PDP dropdown selectable.
+  if (product?.options) {
+    product.options.forEach((opt) => {
+      opt.values?.forEach((v) => {
+        // eslint-disable-next-line no-param-reassign
+        v.inStock = true;
+      });
+    });
+  }
+
+  const langDefinitions = {
+    default: {
+      ...labels,
+    },
+  };
+
+  const models = {
+    ProductDetails: {
+      initialData: { ...product },
+    },
+  };
+
+  // Initialize Dropins
+  return initializers.mountImmediately(initialize, {
+    sku,
+    optionsUIDs,
+    langDefinitions,
+    models,
+    acdl: true,
+    persistURLParams: true,
+  });
+})();
+
+async function preloadImageMiddleware(data) {
+  const image = data?.images?.[0]?.url?.replace(/^https?:/, '');
+
+  if (image) {
+    let url = image;
+    let imageParams = {
+      ...IMAGES_SIZES,
+    };
+    if (isAemAssetsEnabled) {
+      url = tryGenerateAemAssetsOptimizedUrl(image, data.sku, {});
+      imageParams = {
+        ...imageParams,
+        crop: undefined,
+        fit: undefined,
+        auto: undefined,
+      };
+    }
+    await UI.render(Image, {
+      src: url,
+      ...IMAGES_SIZES.mobile,
+      params: imageParams,
+      loading: 'eager',
+    })(document.createElement('div'));
+  }
+  return data;
+}
