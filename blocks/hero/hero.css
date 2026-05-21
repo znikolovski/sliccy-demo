@@ -1,86 +1,187 @@
+/* ============================================================
+   Hero block  full-width background image with text overlay
+   Reference: bodea-com548.adobedemo.com home page
+   ============================================================ */
+
+/* Break out of any section max-width constraints */
 .hero-wrapper {
   max-width: 100% !important;
+  width: 100%;
   padding: 0 !important;
   margin: 0 !important;
 }
 
+.section:has(.hero-wrapper) {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ---- Hero container ---- */
 .hero {
   position: relative;
+  display: block;
   width: 100%;
-  min-height: 400px;
+  min-height: 320px;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  background-color: #1a2535; /* dark fallback while image loads */
+}
+
+@media (width >= 600px) {
+  .hero {
+    min-height: 440px;
+  }
 }
 
 @media (width >= 900px) {
   .hero {
-    min-height: 540px;
+    min-height: 520px;
   }
 }
 
-/* Row and inner cell fill the block */
-.hero > div,
-.hero > div > div {
-  position: absolute;
-  inset: 0;
+/* Strip wrapper divs of all spacing */
+.hero > div {
   margin: 0;
   padding: 0;
-}
-
-/* Picture covers the full area */
-.hero picture {
-  display: block;
-  width: 100%;
   height: 100%;
 }
 
-.hero img {
+.hero > div > div {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  min-height: inherit;
+}
+
+/* ---- Picture / Image fills the block ---- */
+.hero picture {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
 }
 
-/* Text overlay  bottom-left, semi-transparent bg */
+/* ---- Dark gradient overlay so text is readable ---- */
+.hero > div > div::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.05) 70%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---- Text overlay  bottom-left positioning ---- */
 .hero h1,
 .hero h2 {
-  position: absolute;
-  bottom: 80px;
-  left: 0;
+  position: relative;
   z-index: 2;
+  color: #fff;
   margin: 0;
-  padding: 16px 24px;
-  background-color: rgba(255, 255, 255, 0.88);
-  color: #333333;
-  font-size: var(--heading-font-size-xl, 2rem);
-  font-weight: 300;
-  max-width: 60%;
+  padding: 0 1.5rem 0.5rem;
+  font-family: var(--heading-font-family, 'Open Sans', Helvetica, Arial, sans-serif);
+  font-size: clamp(1.5rem, 4vw, 2.75rem);
+  font-weight: 700;
   line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
 }
 
 .hero p {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
+  position: relative;
   z-index: 2;
   margin: 0;
-  padding: 0;
+  padding: 0 1.5rem 2rem;
 }
 
-.hero p a {
+.hero p:first-of-type:not(:has(a)) {
+  /* If the p only contains text (no picture, no link), treat as body copy */
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+/* CTA button */
+.hero p a:any-link {
   display: inline-block;
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
-  color: #333333;
-  padding: 14px 20px;
-  font-size: 14px;
-  font-weight: 400;
+  background-color: #35b28c;
+  color: #fff;
+  padding: 0.65rem 1.75rem;
+  border-radius: 3px;
   text-decoration: none;
-  border-radius: 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.hero p a:hover {
-  background-color: #dddddd;
+.hero p a:any-link:hover {
+  background-color: #2a9070;
+}
+
+/* ---- Layout: stack text at bottom of the image container ---- */
+.hero > div > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* When the hero has both a picture and text siblings we need the
+   picture to be positioned absolutely so text flows naturally below it.
+   EDS wraps everything inside one .hero > div > div, so we rely
+   on the absolute picture + flex column on the container. */
+
+/* ---- Ensure picture fills even when sibling text is present ---- */
+.hero > div > div:has(picture) {
+  min-height: 320px;
+}
+
+@media (width >= 600px) {
+  .hero > div > div:has(picture) {
+    min-height: 440px;
+  }
+}
+
+@media (width >= 900px) {
+  .hero > div > div:has(picture) {
+    min-height: 520px;
+  }
+}
+
+/* When hero only contains a picture (no h1/h2), still fill the space */
+.hero > div > div:has(picture):not(:has(h1, h2)) {
+  /* still full height */
+}
+
+/* ---- Mobile text sizing ---- */
+@media (width < 600px) {
+  .hero h1,
+  .hero h2 {
+    font-size: 1.5rem;
+    padding: 0 1rem 0.5rem;
+  }
+
+  .hero p {
+    padding: 0 1rem 1.5rem;
+  }
 }
