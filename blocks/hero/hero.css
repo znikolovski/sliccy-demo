@@ -55,6 +55,16 @@
   min-height: inherit;
 }
 
+/* ---- Picture wrapper paragraph: collapse it so it doesn't affect flex layout ---- */
+/* EDS/DA wraps the hero image in <p><picture>...<img>...</picture></p> */
+.hero > div > div > p:has(picture) {
+  margin: 0;
+  padding: 0;
+  height: 0;          /* collapse  picture is absolute, takes no flow space */
+  overflow: visible;
+  position: static;
+}
+
 /* ---- Picture / Image fills the block ---- */
 .hero picture {
   display: block;
