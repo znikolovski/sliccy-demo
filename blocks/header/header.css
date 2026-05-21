@@ -1,10 +1,11 @@
 /* ============================================================
-   Bodea / Luma Header  EDS header block
+   Bodea / Luma Header  EDS header block
    Source: bodea-com548.adobedemo.com
-   
-   Structure: two-tier
-     Row 1: logo (center) + tools (right) on white bg
-     Row 2: nav sections on teal (#35b28c) bg
+
+   Three-tier desktop layout (top ’ bottom):
+     Row 0: dark utility bar (#54616a)  tools (sign in / cart)
+     Row 1: white logo row               brand + search/cart icons
+     Row 2: teal nav bar (#35b28c)       primary nav sections
    ============================================================ */
 
 /* ---- Wrapper ---- */
@@ -16,7 +17,7 @@ header .nav-wrapper {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-/* ---- Base nav grid (mobile) ---- */
+/* ---- Base nav (mobile-first single column) ---- */
 header nav {
   box-sizing: border-box;
   display: grid;
@@ -27,7 +28,7 @@ header nav {
   gap: 0;
   margin: 0 auto;
   max-width: 1248px;
-  padding: 0 20px;
+  padding: 0 16px;
   font-family: var(--body-font-family);
 }
 
@@ -41,25 +42,41 @@ header nav[aria-expanded='true'] {
   background-color: #fff;
 }
 
-/* ---- Desktop two-row layout ---- */
+/* ---- Desktop: three-row layout, full-width utility bar ---- */
 @media (width >= 900px) {
   header .nav-wrapper {
     position: sticky;
     top: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Row 0: utility / tools bar  full bleed dark bg */
+  header .nav-wrapper::before {
+    content: '';
+    display: block;
+    background-color: #54616a;
+    height: 0;          /* height comes from the tools row in the grid */
+    width: 100%;
   }
 
   header nav,
   header nav[aria-expanded='true'] {
     display: grid;
+    /* Row 0: tools (full width, dark bg)
+       Row 1: logo row (white)
+       Row 2: nav sections (teal) */
     grid-template:
-      '. brand tools' 88px
-      'sections sections sections' 44px / auto 1fr auto;
-    align-items: center;
+      'tools tools tools' 36px
+      '. brand .' 72px
+      'sections sections sections' 44px / 1fr auto 1fr;
+    align-items: stretch;
     gap: 0;
     max-width: 100%;
     padding: 0;
     min-height: 0;
     overflow: visible;
+    width: 100%;
   }
 }
 
@@ -156,7 +173,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* ---- Brand / Logo ---- */
+/* ---- Brand / Logo row ---- */
 header .nav-brand {
   grid-area: brand;
   display: flex;
@@ -168,15 +185,162 @@ header .nav-brand {
 
 @media (width >= 900px) {
   header .nav-brand {
-    padding: 0 20px;
     justify-content: flex-start;
+    padding: 0 24px;
+    background-color: #fff;
+    /* Span full width so white bg fills the logo row */
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 1248px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
 header nav .nav-brand img {
-  width: 170px;
+  width: auto;
+  max-width: 180px;
+  max-height: 56px;
   height: auto;
   display: block;
+}
+
+/* Text fallback if logo image is missing */
+header nav .nav-brand .nav-brand-text,
+header nav .nav-brand p:only-child {
+  font-family: var(--heading-font-family, 'Open Sans', Helvetica, Arial, sans-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.01em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* White background fill for logo row on desktop */
+@media (width >= 900px) {
+  header .nav-wrapper {
+    /* Creates the 3-tier visual stack */
+  }
+
+  /* Pseudo full-width white bg for logo row */
+  header nav::before {
+    content: '';
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    background-color: #fff;
+    align-self: stretch;
+  }
+
+  /* Pseudo full-width teal bg for nav row */
+  header nav::after {
+    content: '';
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    background-color: #35b28c;
+    align-self: stretch;
+  }
+}
+
+/* ---- Tools (utility bar) ---- */
+header nav .nav-tools {
+  grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 20px;
+  background-color: #fff;
+}
+
+/* Mobile: show tools below sections when expanded */
+@media (width < 900px) {
+  header nav .nav-tools {
+    padding: 12px 20px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+  }
+}
+
+header nav .nav-tools ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+header nav .nav-tools ul > li {
+  font-size: 13px;
+  color: #54616a;
+  position: relative;
+}
+
+/* Separator between utility links */
+header nav .nav-tools ul > li + li::before {
+  content: '|';
+  padding: 0 6px;
+  color: #ccc;
+}
+
+@media (width < 900px) {
+  header nav .nav-tools ul > li + li::before {
+    content: '';
+    padding: 0;
+  }
+
+  header nav .nav-tools ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+header nav .nav-tools ul > li > a {
+  color: #54616a;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+header nav .nav-tools ul > li > a:hover {
+  color: #35b28c;
+  text-decoration: underline;
+}
+
+/* Desktop: utility bar  dark background, right-aligned, full width */
+@media (width >= 900px) {
+  header nav .nav-tools {
+    grid-area: tools;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    background-color: #54616a;
+    justify-content: flex-end;
+    padding: 0 24px;
+    align-self: stretch;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  header nav .nav-tools ul > li > a {
+    color: #f2f2f2;
+    font-size: 13px;
+  }
+
+  header nav .nav-tools ul > li > a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  header nav .nav-tools ul > li + li::before {
+    color: #8a9399;
+  }
+
+  header nav .nav-tools ul > li {
+    color: #f2f2f2;
+  }
 }
 
 /* ---- Sections (main nav) ---- */
@@ -233,14 +397,18 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
-/* Desktop: horizontal nav on teal bar */
+/* Desktop: horizontal nav on teal bar  full width */
 @media (width >= 900px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
     white-space: nowrap;
-    padding: 0 20px;
+    padding: 0;
     align-self: stretch;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    background-color: #35b28c;
+    z-index: 1;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -253,6 +421,9 @@ header nav .nav-sections ul > li > ul > li {
     height: 100%;
     display: flex;
     align-items: center;
+    max-width: 1248px;
+    margin: 0 auto;
+    padding: 0 16px;
   }
 
   header nav .nav-sections ul {
@@ -351,7 +522,7 @@ header nav .nav-sections ul > li > ul > li {
     color: #35b28c;
   }
 
-  /* Nested submenu (e.g. Servers and Racks) */
+  /* Nested submenu */
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > ul {
     display: block;
     padding: 0;
@@ -371,102 +542,5 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > ul > li > a:hover {
     background-color: #f5f5f5;
     color: #35b28c;
-  }
-}
-
-/* ---- Tools (utility bar) ---- */
-header nav .nav-tools {
-  grid-area: tools;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 20px;
-  background-color: #fff;
-}
-
-/* Mobile: show tools below sections when expanded */
-@media (width < 900px) {
-  header nav .nav-tools {
-    padding: 12px 20px;
-    border-top: 1px solid #eee;
-    flex-wrap: wrap;
-  }
-}
-
-header nav .nav-tools ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-header nav .nav-tools ul > li {
-  font-size: 14px;
-  color: #54616a;
-  position: relative;
-}
-
-/* Separator between utility links */
-header nav .nav-tools ul > li + li::before {
-  content: '|';
-  padding: 0 6px;
-  color: #ccc;
-}
-
-@media (width < 900px) {
-  header nav .nav-tools ul > li + li::before {
-    content: '';
-    padding: 0;
-  }
-  header nav .nav-tools ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-}
-
-header nav .nav-tools ul > li > a {
-  color: #54616a;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-header nav .nav-tools ul > li > a:hover {
-  color: #35b28c;
-  text-decoration: underline;
-}
-
-/* Desktop: tools area has a top-bar feel with dark bg per source */
-@media (width >= 900px) {
-  header .nav-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Top bar with utility links uses dark gray from source */
-  header nav .nav-tools {
-    background-color: #54616a;
-    justify-content: flex-end;
-    padding: 0 20px;
-  }
-
-  header nav .nav-tools ul > li > a {
-    color: #f2f2f2;
-    font-size: 13px;
-  }
-
-  header nav .nav-tools ul > li > a:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-
-  header nav .nav-tools ul > li + li::before {
-    color: #8a9399;
-  }
-
-  header nav .nav-tools ul > li {
-    color: #f2f2f2;
   }
 }
