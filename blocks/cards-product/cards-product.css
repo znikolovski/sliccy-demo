@@ -1,0 +1,89 @@
+.cards-product {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards-product > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.cards-product > ul > li {
+  background-color: #35b28c;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cards-product .cards-product-card-image {
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.cards-product .cards-product-card-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.cards-product .cards-product-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cards-product > ul > li h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: var(--heading-font-size-s, 20px);
+}
+
+.cards-product > ul > li p {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.cards-product > ul > li p:last-child {
+  margin-top: auto;
+  padding-top: 8px;
+  margin-bottom: 0;
+}
+
+/* CTA button override */
+main .cards-product a.button:any-link {
+  display: inline-flex;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 14px 17px;
+  text-decoration: none;
+  white-space: nowrap;
+  margin: 0;
+}
+
+main .cards-product a.button:any-link:hover {
+  background-color: #dddddd;
+  text-decoration: none;
+}
+
+main .cards-product .button-container {
+  display: block;
+  margin-bottom: 0;
+}
