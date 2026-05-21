@@ -1,10 +1,5 @@
-.cards-product {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.cards-product-wrapper {
+  padding: 0 24px;
 }
 
 .cards-product > ul {
@@ -12,8 +7,20 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (width < 768px) {
+  .cards-product > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width >= 768px) and (width < 1024px) {
+  .cards-product > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .cards-product > ul > li {
@@ -24,9 +31,9 @@
   overflow: hidden;
 }
 
+/* Image: full width at top */
 .cards-product .cards-product-card-image {
   line-height: 0;
-  flex-shrink: 0;
 }
 
 .cards-product .cards-product-card-image img {
@@ -36,6 +43,7 @@
   display: block;
 }
 
+/* Card body */
 .cards-product .cards-product-card-body {
   padding: 16px;
   display: flex;
@@ -47,7 +55,8 @@
   margin-top: 0;
   margin-bottom: 8px;
   color: #ffffff;
-  font-size: var(--heading-font-size-s, 20px);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .cards-product > ul > li p {
@@ -63,24 +72,22 @@
   margin-bottom: 0;
 }
 
-/* CTA button override */
+/* CTA button */
 main .cards-product a.button:any-link {
-  display: inline-flex;
+  display: inline-block;
   background-color: #eeeeee;
   border: 1px solid #cccccc;
   border-radius: 0;
   color: #333333;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 400;
   padding: 14px 17px;
   text-decoration: none;
   white-space: nowrap;
-  margin: 0;
 }
 
 main .cards-product a.button:any-link:hover {
   background-color: #dddddd;
-  text-decoration: none;
 }
 
 main .cards-product .button-container {
