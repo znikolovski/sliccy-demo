@@ -2,7 +2,7 @@
    Bodea / Luma Header  EDS header block
    Source: bodea-com548.adobedemo.com
 
-   Three-tier desktop layout (top ’ bottom):
+   Three-tier desktop layout (top  bottom):
      Row 0: dark utility bar (#54616a)  tools (sign in / cart)
      Row 1: white logo row               brand + search/cart icons
      Row 2: teal nav bar (#35b28c)       primary nav sections
@@ -52,9 +52,9 @@ header nav[aria-expanded='true'] {
   }
 
   /* Desktop nav: 3-row layout via grid
-     Row 1 (tools): dark utility bar  ’ nav-tools fills row with #54616a bg
-     Row 2 (brand): white logo row    ’ nav-brand fills row with #fff bg
-     Row 3 (sections): teal nav bar   ’ nav-sections fills row with #35b28c bg */
+     Row 1 (tools): dark utility bar   nav-tools fills row with #54616a bg
+     Row 2 (brand): white logo row     nav-brand fills row with #fff bg
+     Row 3 (sections): teal nav bar    nav-sections fills row with #35b28c bg */
   header nav,
   header nav[aria-expanded='true'] {
     display: grid;
@@ -364,7 +364,10 @@ header nav .nav-sections ul > li {
   color: #54616a;
 }
 
+/* Hide nav sub-lists by default (JS sets aria-expanded to show them on desktop;
+   mobile accordion keeps them visible inside the open mobile menu) */
 header nav .nav-sections ul > li > ul {
+  display: none;
   margin-top: 0;
 }
 
