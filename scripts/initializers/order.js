@@ -1,6 +1,6 @@
 import { events } from '@dropins/tools/event-bus.js';
 import { initializers } from '@dropins/tools/initializer.js';
-import { getHeaders } from '@dropins/tools/lib/aem/configs.js';
+import { getConfigValue, getHeaders } from '@dropins/tools/lib/aem/configs.js';
 import { initialize, setEndpoint, setFetchGraphQlHeaders } from '@dropins/storefront-order/api.js';
 import { initializeDropin } from './index.js';
 import {
