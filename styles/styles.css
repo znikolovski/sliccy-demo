@@ -326,9 +326,11 @@ main .section.highlight {
   padding: 40px 0;
 }
 
-/* EDS button reset for Commerce dropin compatibility */
-main .button-container { display: inline; }
-main a.button:any-link {
+/* EDS button reset  scoped to Commerce dropin containers only.
+   Hero, product card, and other content CTAs keep proper button styling.
+   Commerce dropin blocks add class "dropin-button-reset" to their wrapper. */
+.dropin-button-reset .button-container { display: inline; }
+.dropin-button-reset a.button:any-link {
   background: none; border: none; border-radius: 0;
   color: var(--link-color); font-size: inherit; font-weight: inherit;
   padding: 0; margin: 0; text-decoration: underline; white-space: normal;
