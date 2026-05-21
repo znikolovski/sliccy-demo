@@ -1,4 +1,4 @@
-import { getHeaders } from '@dropins/tools/lib/aem/configs.js';
+import { getConfigValue, getHeaders } from '@dropins/tools/lib/aem/configs.js';
 import { initializers } from '@dropins/tools/initializer.js';
 import { initialize, setEndpoint, setFetchGraphQlHeaders } from '@dropins/storefront-account/api.js';
 import { initializeDropin } from './index.js';
