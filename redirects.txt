@@ -1,3 +1,6 @@
-/racker-blade-server /products/bodea-racker-blade-server/bodea-racker-blade-server 301
-/vr-rack /products/bodea-vr-rack/bodea-vr-rack 301
-/lithium-standby-power-supply /products/lithium-standby-power-supply/lsps-01 301
+/racker-blade-server /products/bodea-racker-blade-server 301
+/vr-rack /products/bodea-vr-rack 301
+/lithium-standby-power-supply /products/lsps-01 301
+/products /products/ 301
+/software /software/ 301
+/services /services/ 301
