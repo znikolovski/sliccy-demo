@@ -90,7 +90,6 @@ const e = `
   uid
   quantity
   is_available
-  not_available_message
   errors {
     code
     message
@@ -130,14 +129,6 @@ const e = `
       }
       label
     }
-    original_item_price {
-      value
-      currency
-    }
-    original_row_total {
-      value
-      currency
-    }
   }
   product {
     name
@@ -152,13 +143,7 @@ const e = `
         percent_off
       }
     }
-    quantity
     gift_message_available
-    gift_wrapping_available
-    gift_wrapping_price {
-      currency
-      value
-    }
     thumbnail {
       url
       label
@@ -342,10 +327,6 @@ ${n}`, c = `fragment CART_FRAGMENT on Cart {
       value
     }
     grand_total {
-      currency
-      value
-    }
-    grand_total_excluding_tax {
       currency
       value
     }
