@@ -144,7 +144,7 @@ function normaliseNavFragment(fragment) {
     else {
       // Fallback text logo
       const p = document.createElement('p');
-      p.textContent = 'BODÉA INC.';
+      p.textContent = 'BODï¿½A INC.';
       brandDiv.append(p);
     }
 
@@ -225,9 +225,19 @@ export default async function decorate(block) {
     if (!existingText) {
       const p = document.createElement('p');
       p.classList.add('nav-brand-text');
-      p.textContent = 'BODÉA INC.';
+      p.textContent = 'BODï¿½A INC.';
       navBrand.prepend(p);
     }
+  }
+
+  // Wrap brand image/text in a home link if not already wrapped
+  if (navBrand && !navBrand.querySelector('a[href="/"]')) {
+    const homeLink = document.createElement('a');
+    homeLink.href = '/';
+    homeLink.setAttribute('aria-label', 'Home');
+    homeLink.className = 'nav-brand-link';
+    while (navBrand.firstChild) homeLink.appendChild(navBrand.firstChild);
+    navBrand.appendChild(homeLink);
   }
 
   // Strip button decoration from brand link if present
