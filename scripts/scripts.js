@@ -238,6 +238,18 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  // Handle page-level redirects defined via the page-metadata block in DA.
+  // A table with first cell "Page Metadata" and a row "Redirect | /target/" triggers a redirect.
+  const pageMetaBlock = doc.querySelector('.page-metadata');
+  if (pageMetaBlock) {
+    const rows = pageMetaBlock.querySelectorAll('tr');
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length >= 2 && cells[0].textContent.trim().toLowerCase() === 'redirect') {
+        window.location.replace(cells[1].textContent.trim());
+      }
+    });
+  }
   // Fire-and-forget commerce init: do not block page rendering on commerce setup.
   // Commerce dropins will initialize async in the background once config is fetched.
   initializeCommerce().catch((e) => {
